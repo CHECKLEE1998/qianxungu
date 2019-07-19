@@ -6,11 +6,14 @@ import store from './store'
 import ElementUi from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
+// 公用插件
+import './mixin'
 
 // 端口
 import './apis'
 // 样式
 import 'reset.css'
+import './style/font/iconfont.css'
 
 Vue.use(ElementUi)
 
@@ -27,7 +30,7 @@ router.beforeEach((to,from,next)=>{
     console.log(token);
 
     // 目前处于开发阶段 参数只填true和false
-    if(false) {
+    if(true) {
       next();
     } else {
       next({path:'/Login',query:{redirector: to.path}})

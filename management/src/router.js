@@ -10,12 +10,12 @@ export default new Router({
   routes: [
     {
       path:"/",
-      redirect: 'Home',
+      redirect: 'Home/System',
     },
     {
       path: '/Home',
       name: 'Home',
-      component: () => import(/* webpackChunkName: "Home" */ './components/Home/Home'),
+      component: () => import(/* webpackChunkName: "Home" */ './components/Home/Page/Home'),
       children: [
         {
           path: 'Calendar',
