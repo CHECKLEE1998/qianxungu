@@ -3,7 +3,7 @@ import Vue from 'vue'
 // 获取配置好的 .env.development和.env.production里配置好的的BASEURL
 
 axios.defaults.baseURL = process.env.VUE_APP_BASEURL;
-console.log(axios.defaults.baseURL)
+// console.log(axios.defaults.baseURL)
 // Add a request interceptor
 axios.interceptors.request.use(function (config) {
     // Do something before request is sent
@@ -26,7 +26,7 @@ axios.interceptors.response.use(function (response) {
 var mtAxios = {
     get:function(url,pramas){
       
-      console.log('1')
+      // console.log('1')
         return axios.get(url,{params:pramas});
     },
     post:function(url,pramas){
@@ -38,5 +38,5 @@ var mtAxios = {
 // 以后所有的Vue组件都可以直接通过this.$http的方式访问get和post请求
 // this.$http.get() 或 this.$http.post();
 Vue.prototype.$http = mtAxios;
-console.log(Vue.prototype)
+// console.log(Vue.prototype)
 export default {}

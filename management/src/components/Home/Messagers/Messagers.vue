@@ -1,48 +1,44 @@
 <template>
-  <div id="Messagers">
+  <el-form id="Messagers">
     <!-- Title -->
     <div class="cov">
       <h2>留言系统</h2>
     </div>
 
     <!-- 操作台 -->
-    <div>
+    <el-form>
       <div class="econ">
         <div class="titles">
-            <span>留言ID</span>
-          <el-input placeholder="请输入内容" prefix-icon="el-icon-search"></el-input>
+          <span>留言ID</span>
+          <el-input placeholder="请输入内容"  v-model="MessID"></el-input>
         </div>
         <div class="names">
-            <span>留言人昵称</span>
-          <el-input placeholder="请输入内容" prefix-icon="el-icon-search"></el-input>
+          <span>留言人昵称</span>
+          <el-input placeholder="请输入内容" v-model="MessName"></el-input>
+        </div>
+        <div class="cons">
+          <span>留言内容</span>
+          <el-input placeholder="请输入内容" v-model="MessCon"></el-input>
         </div>
       </div>
 
-      <el-form ref="form" :model="sizeForm" label-width="82px">
-        <el-form-item label="留言内容">
-          <el-input v-model="sizeForm.name"></el-input>
-        </el-form-item>
-      </el-form>
+    
 
       <div class="btns">
-        <el-button type="primary" round>添加您的留言</el-button>
-        <el-button type="danger" round>重置</el-button>
+        <el-button type="primary" round @click="addMess()">添加您的留言</el-button>
+        <el-button type="danger" round @click="resets()">重置</el-button>
       </div>
-    </div>
+    </el-form>
 
     <!-- 内容 -->
     <div class="content">
-      <el-collapse
-        name="index"
-        v-for="(item,index) in messList"
-        :key="index + item"
-      >
-        <el-collapse-item :title="item.title">
-          <div>{{item.mess}}</div>
+      <el-collapse name="index" v-for="(item,index) in messList" :key="index + item">
+        <el-collapse-item :title="`${item.userId} 给 ${item.nickName} 的留言`">
+          <div>{{item.content}}</div>
         </el-collapse-item>
       </el-collapse>
     </div>
-  </div>
+  </el-form>
 </template>
 
 <script>
@@ -50,44 +46,26 @@ export default {
   name: "Messagers",
   data() {
     return {
-      // 测试
-      messList: [
-        {
-          mess: "你好你好你好你好你好你好你好你好你好你好你好你好你好",
-          title: "留言内容"
-        },
-        {
-          mess: "HelloHelloHelloHelloHelloHelloHelloHelloHelloHello",
-          title: "留言内容"
-        },
-        {
-          mess: "ONGONGONGONGONGONGONGONGONGONGONGONGONGONGONGONGONG",
-          title: "留言内容"
-        }
-      ],
-
-      // 操作台
-      sizeForm: {
-        name: "",
-        region: "",
-        date1: "",
-        date2: "",
-        delivery: false,
-        type: [],
-        resource: "",
-        desc: "",
-      },
+      MessID: '',
+      MessName: '',
+      MessCon: '',
+      messList: [],
     };
   },
-  
-  mounted(){
-    this.getData()
-  },
-   methods:{
-      getData() {
-       
-      }
-   }
+  methods: {
+    // addMess() {
+    //   this.$http.post(this.$apis.leaveMessage,{userId:this.MessID, nickName:this.MessName, content: this.MessCon}).then((res)=>{
+    //     this.messList = res.config.data
+    //     console.log(this.messList)
+    //   })
+    // },
+    // 重置
+    resets() {
+      this.MessID = "",
+      this.MessName = "",
+      this.MessCon = ""
+    }
+  }
 };
 </script>
 
@@ -104,31 +82,51 @@ export default {
     }
   }
   .econ {
-      width: 500px;
-      .titles {
-          padding: 5px 0;
-          display: flex;
-          align-items: center;
-          span {
-              display: inline-block;
-              width: 100px;
-              color: #333;
-          }
+    width: 500px;
+    .titles {
+      padding: 5px 0;
+      display: flex;
+      align-items: center;
+      span {
+        display: inline-block;
+        width: 100px;
+        color: #333;
+        font-size: 14px;
+        text-align: right;
+        padding: 0 12px 0 0;
       }
-      .names {
-          
-          padding: 5px 0;
-          display: flex;
-          align-items: center;
-          span {
-              display: inline-block;
-              width: 100px;
-              color: #333;
-          }
+    }
+    .names {
+      padding: 5px 0;
+      display: flex;
+      align-items: center;
+
+      span {
+        padding: 0 12px 0 0;
+        text-align: right;
+        display: inline-block;
+        width: 100px;
+        color: #333;
+        font-size: 14px;
       }
+    }
+    .cons {
+      padding: 5px 0;
+      display: flex;
+      align-items: center;
+
+      span {
+        padding: 0 12px 0 0;
+        text-align: right;
+        display: inline-block;
+        width: 100px;
+        color: #333;
+        font-size: 14px;
+      }
+    }
   }
   .btns {
-      padding: 0 0 20px 0;
+    padding: 10px 0 20px 0;
   }
 }
 </style>

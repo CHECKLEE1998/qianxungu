@@ -22,7 +22,7 @@ Vue.use(ElementUi)
 
 Vue.config.productionTip = false
 
-console.log(process.env)
+// console.log(process.env)
 // 路由守卫 -- 判断是否已登入
 router.beforeEach((to,from,next)=>{
   // console.log(to,from,next);

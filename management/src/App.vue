@@ -9,7 +9,17 @@
 
 <script>
 export default {
-  
+  data() {
+    return {
+      
+    }
+  },
+  // 刷新跳转至首页
+  created(){ 
+        if(this.$router.path !== '/Home/System'){
+            this.$router.replace('/Home/System')
+        }
+    }
 }
 </script>
 
