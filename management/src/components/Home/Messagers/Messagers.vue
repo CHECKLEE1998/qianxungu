@@ -33,7 +33,6 @@
     <!-- 内容 -->
     <div class="content">
       <el-collapse
-        v-model="activeName"
         name="index"
         v-for="(item,index) in messList"
         :key="index + item"
@@ -76,10 +75,19 @@ export default {
         delivery: false,
         type: [],
         resource: "",
-        desc: ""
-      }
+        desc: "",
+      },
     };
-  }
+  },
+  
+  mounted(){
+    this.getData()
+  },
+   methods:{
+      getData() {
+       
+      }
+   }
 };
 </script>
 

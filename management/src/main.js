@@ -8,17 +8,21 @@ import 'element-ui/lib/theme-chalk/index.css'
 
 // 公用插件
 import './mixin'
+// import VueResource from 'vue-resource'
+import './apis/mtaxios'
 
-// 端口
+// 接口
 import './apis'
 // 样式
 import 'reset.css'
 import './style/font/iconfont.css'
 
 Vue.use(ElementUi)
+// Vue.use(VueResource)
 
 Vue.config.productionTip = false
 
+console.log(process.env)
 // 路由守卫 -- 判断是否已登入
 router.beforeEach((to,from,next)=>{
   // console.log(to,from,next);
@@ -27,7 +31,7 @@ router.beforeEach((to,from,next)=>{
     next();
   } else {
     var token = localStorage.getItem("token");
-    console.log(token);
+    // console.log(token);
 
     // 目前处于开发阶段 参数只填true和false
     if(true) {
