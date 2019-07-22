@@ -25,8 +25,6 @@ axios.interceptors.response.use(function (response) {
 });
 var mtAxios = {
     get:function(url,pramas){
-      
-      console.log('1')
         return axios.get(url,{params:pramas});
     },
     post:function(url,pramas){
