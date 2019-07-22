@@ -1,6 +1,9 @@
 <template>
   <div id="app">
+    <transition name="all">
+    
       <router-view></router-view>
+    </transition>
   </div>
 </template>
 
@@ -16,5 +19,8 @@ export default {
     height: 100%;
     width: 100%;
     background: orange;
+  }
+  .all {
+    transition: .5s;
   }
 </style>
