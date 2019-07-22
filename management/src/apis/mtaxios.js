@@ -25,8 +25,7 @@ axios.interceptors.response.use(function (response) {
 });
 var mtAxios = {
     get:function(url,pramas){
-      
-      // console.log('1')
+    refs/remotes/origin/master
         return axios.get(url,{params:pramas});
     },
     post:function(url,pramas){
