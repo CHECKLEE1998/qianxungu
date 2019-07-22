@@ -9,11 +9,11 @@
     <div>
       <div class="econ">
         <div class="titles">
-            <span>留言主题</span>
+            <span>留言ID</span>
           <el-input placeholder="请输入内容" prefix-icon="el-icon-search"></el-input>
         </div>
         <div class="names">
-            <span>留言人姓名</span>
+            <span>留言人昵称</span>
           <el-input placeholder="请输入内容" prefix-icon="el-icon-search"></el-input>
         </div>
       </div>
