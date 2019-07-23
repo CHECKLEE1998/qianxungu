@@ -25,7 +25,7 @@
     
 
       <div class="btns">
-        <el-button type="primary" round @click="addMess()">添加您的留言</el-button>
+        <el-button type="primary" round @click="getData()">添加您的留言</el-button>
         <el-button type="danger" round @click="resets()">重置</el-button>
       </div>
     </el-form>
@@ -53,12 +53,11 @@ export default {
     };
   },
   methods: {
-    // addMess() {
-    //   this.$http.post(this.$apis.leaveMessage,{userId:this.MessID, nickName:this.MessName, content: this.MessCon}).then((res)=>{
-    //     this.messList = res.config.data
-    //     console.log(this.messList)
-    //   })
-    // },
+    getData() {
+      this.$http.post(this.$apis.addNewRole,{userId:this.MessID,nickName:this.MessName,content:this.MessCon,vedioID:"5cfe6d7b0d86c842f3d3c688"}).then((resp)=>{
+        console.log(resp)
+      })
+    },
     // 重置
     resets() {
       this.MessID = "",
