@@ -5,6 +5,8 @@ import store from './store'
 // Ui 框架
 import ElementUi from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import iView from 'iview';
+import 'iview/dist/styles/iview.css';
 
 // 公用插件
 import './mixin'
@@ -18,6 +20,7 @@ import 'reset.css'
 import './style/font/iconfont.css'
 
 Vue.use(ElementUi)
+Vue.use(iView);
 // Vue.use(VueResource)
 
 Vue.config.productionTip = false

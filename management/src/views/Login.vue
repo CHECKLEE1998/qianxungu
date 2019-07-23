@@ -29,7 +29,7 @@ export default {
     },
     methods:{
       async getData(){
-        let res = await this.$http.get(this.$apis.dynamicVerification)
+        let res = await this.$http.get(this.$apis.DynamicVerification)
         console.log(res.data.data);
         let svg = document.getElementsByClassName("svg")[0];
         svg.innerHTML = res.data.data.data
@@ -37,7 +37,7 @@ export default {
         console.log(this.code)
       },
       async upData(){
-        let res = await this.$http.get(this.$apis.dynamicVerification)
+        let res = await this.$http.get(this.$apis.DynamicVerification)
         let svg = document.getElementsByClassName("svg")[0];
         svg.innerHTML = res.data.data.data
         this.code = res.data.data.text
@@ -45,9 +45,10 @@ export default {
       },
       login(){
         this.$http.post(
-            "http://localhost:3000/signin",
+            this.$apis.LoginSystem,
             {username:this.username,password:this.password},
         ).then(response => {
+          // console.log(response)
             this.x= response
             console.log(response);
             if(response.data.token && this.verification==this.code){

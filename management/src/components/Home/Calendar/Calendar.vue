@@ -1,15 +1,21 @@
 <template>
-    <div id="Calendar">
-        日历系统
+  <div id="Calendar">
+    <div>
+      <el-calendar v-model="value"></el-calendar>
     </div>
+  </div>
 </template>
 
 <script>
 export default {
-    name: "Calendar"
-}
+  name: "Calendar",
+   data() {
+      return {
+        value: new Date()
+      }
+    }
+};
 </script>
 
 <style lang="scss" scoped>
-
 </style>

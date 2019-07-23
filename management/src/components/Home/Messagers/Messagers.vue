@@ -53,10 +53,21 @@ export default {
     };
   },
   methods: {
-    getData() {
-      this.$http.post(this.$apis.addNewRole,{userId:this.MessID,nickName:this.MessName,content:this.MessCon,vedioID:"5cfe6d7b0d86c842f3d3c688"}).then((resp)=>{
-        console.log(resp)
+    async getData() {
+      if(this.MessID && this.MessName && this.MessCon) {
+      await this.$http.post(this.$apis.addNewMessage,{userId:this.MessID,nickName:this.MessName,content:this.MessCon,vedioID:"5cfe6d7b0d86c842f3d3c688"}).then((resp)=>{
+        var obj = JSON.parse(resp.config.data)
+        console.log(obj)
+        this.messList.push({
+          userId:obj.userId,
+          content: obj.content,
+          nickName: obj.nickName,
+          vedioID: obj.vedioID,
+        })
       })
+      } else {
+        alert("请输入相应信息")
+      }
     },
     // 重置
     resets() {

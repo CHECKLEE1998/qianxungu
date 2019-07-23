@@ -64,7 +64,6 @@ export default {
       width: 1000px;
       text-align: center;
       line-height: 30px;
-      padding: 10px;
       margin-top: 20px;
       transition: 0.2s;
       &:hover {
