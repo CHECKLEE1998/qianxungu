@@ -2,14 +2,12 @@
     <div id="login">
       <div class="form">
         <form>
-          <input type="text" class="text" placeholder="请输入账号">
-          <input type="password" class="text" placeholder="请输入密码">
+          <input type="text" class="text" placeholder="请输入账号" v-model="username">
+          <input type="password" class="text" placeholder="请输入密码" v-model="password">
           <div class="svg" @click="upData()" style="width:160px;height:50px;margin-bottom:10px;"></div>
-          <input type="text" class="text" placeholder="请输入验证码">
+          <input type="text" class="text" placeholder="请输入验证码" v-model="verification">
         </form>
-        
-        <button class="loginBtn">登录</button>
-
+        <button class="loginBtn" @click="login()">登录</button>
       </div>
     </div>
 </template>
@@ -20,6 +18,10 @@ export default {
     data() {
         return {
           code:"",
+          username:"",
+          password:"",
+          verification:"",
+          x:"",
         }
     },
     created() {
@@ -40,6 +42,21 @@ export default {
         svg.innerHTML = res.data.data.data
         this.code = res.data.data.text
         console.log(this.code)
+      },
+      login(){
+        this.$http.post(
+            "http://localhost:3000/signin",
+            {username:this.username,password:this.password},
+        ).then(response => {
+            this.x= response
+            console.log(response);
+            if(response.data.token && this.verification==this.code){
+              this.$router.push({path: "/Home"})
+            }else{
+              alert("验证码错误")
+              this.upData()
+            }
+        })
       } 
     }
     
