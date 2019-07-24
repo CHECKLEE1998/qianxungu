@@ -37,11 +37,32 @@
           <li>{{item.username}}</li>
           <li>{{item.nickname}}</li>
           <li>
-            <span>
-              <el-button type="text" @click="current(item)">编辑</el-button>
+            <span @click="current(item)">
+              <Button @click="modal2 = true">编辑</Button>
+              <Modal v-model="modal2" title="编辑资料">
+                <div class="newUsername">
+                  <span>账号：</span>
+                  <input type="text" placeholder="您的账号" disabled="disabled" :value="EditUserName" />
+                </div>
+                <div class="newUsername">
+                  <span>昵称：</span>
+                  <input type="text" placeholder="请输入您需要更改的昵称" :value="EditNickName" />
+                </div>
+                <div class="newPassword">
+                  <span>原密码：</span>
+                  <input type="password" placeholder="请输入您现在的密码" />
+                </div>
+                <div class="isnewPassword">
+                  <span>修改密码：</span>
+                  <input type="password" placeholder="请再次输入您需要的密码" />
+                </div>
+              </Modal>
             </span>
             <span>
-              <el-button type="text" @click="open" class="del">删除管理员</el-button>
+              <Button type="error" @click="modal6 = true">删除此用户</Button>
+              <Modal v-model="modal6" title="警告" @on-ok="asyncOK(item)">
+                <p>您确定将此账号永久删除吗.</p>
+              </Modal>
             </span>
           </li>
         </ul>
@@ -52,18 +73,26 @@
 
 <script>
 export default {
+  inject: ["reload"],
   name: "System",
   data() {
     return {
+      modal6: false,
+      loading: true,
       AdminList: [],
       // 注册表单
       modal1: false,
+      modal2: false,
       newUsername: "",
       newPassword: "",
       isnewPassword: "",
       newNames: "",
-
-      test: ""
+      test: "",
+      // 编辑
+      EditUserName: "",
+      EditNickName: "",
+      EditOldPassword: "",
+      EditNewPassword: ""
     };
   },
   created() {
@@ -72,49 +101,54 @@ export default {
   methods: {
     ok() {
       if (this.newPassword != this.isnewPassword) {
-        alert("两次密码不匹配");
+        this.$Message.info("您输入的密码不一致,无法注册")
       } else if (!this.newUsername) {
-        alert("您输入的账号存在异常");
+        this.$Message.info("您输入的账号不符合 请使用英文加数字的组合")
       } else if (!this.newNames) {
-        alert("请输入您的昵称");
+        this.$Message.info("昵称不能为空")
       } else {
-        this.$http.post(this.$apis.addNewAdmin,{username:this.newUsername,password:this.newPassword,roles:["12131231safadsf1"],nickname:this.newNames}).then((res)=>{
-          router.go(0)
-        })
+        this.$http
+          .post(this.$apis.addNewAdmin, {
+            username: this.newUsername,
+            password: this.newPassword, 
+            roles: ["12131231safadsf1"],
+            nickname: this.newNames
+          })
+          .then(res => {
+            this.$Message.info(res.data.message);
+            this.reload();
+          });
       }
+      (this.newUsername = ""),
+        (this.newPassword = ""),
+        (this.newNames = ""),
+        (this.isnewPassword = "");
     },
     cancel() {
-      this.$Message.info("注册取消");
+      (this.newUsername = ""),
+        (this.newPassword = ""),
+        (this.newNames = ""),
+        this.$Message.info("注册取消");
     },
     // 获取角色
     getData() {
       this.$http.get(this.$apis.findAdmins).then(resp => {
         this.AdminList = resp.data.data;
-        console.log(this.AdminList);
+        // console.log(this.AdminList);
       });
     },
     // 删除
-    open() {
-      this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      })
-        .then(() => {
-          this.$message({
-            type: "success",
-            message: "删除成功!"
-          });
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "已取消删除"
-          });
-        });
+    asyncOK(item) {
+      // console.log(item._id)
+      this.$http.post(this.$apis.deleteAdmin,{_id:item._id}).then((del)=>{
+        this.reload()
+      });
+      this.$Message.info("删除成功")
     },
     current(item) {
-      console.log(item)
+      this.EditUserName = item.username;
+      this.EditNickName = item.nickname;
+      // console.log(this.EditUserName)
     }
   }
 };

@@ -18,6 +18,7 @@
 
 <script>
 export default {
+  name: "Navgation",
   data() {
     return {
       Activesnum: "系统管理",
@@ -26,7 +27,8 @@ export default {
         { title: "日历管理", name: "Calendar" ,icon:"icon-rili"},
         { title: "留言管理", name: "Messagers" ,icon:"icon-liuyan"},
         { title: "类型管理", name: "Types" ,icon:"icon-17"},
-        { title: "音频管理", name: "Frequency" ,icon:"icon-fenghuangxiangmutubiao_yinpinbofang"}
+        { title: "音频管理", name: "Frequency" ,icon:"icon-fenghuangxiangmutubiao_yinpinbofang"},
+        { title: "微信管理", name: "WeChat" ,icon:"icon-weixin"}
       ]
     };
   }
@@ -60,10 +62,10 @@ export default {
   }
   .select {
     li {
-      height: 30px;
+      height: 40px;
       width: 1000px;
       text-align: center;
-      line-height: 30px;
+      line-height: 40px;
       margin-top: 20px;
       transition: 0.2s;
       &:hover {

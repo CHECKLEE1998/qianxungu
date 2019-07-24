@@ -42,6 +42,11 @@ export default new Router({
           name: 'Types',
           component: ()=>import(/* webpackChunkName："Types" */ './components/Home/Types/Types')
         },
+        {
+          path: 'WeChat',
+          name: 'WeChat',
+          component: ()=>import(/* webpackChunkName: "WeChat" */ './components/Home/WeChat/WeChat')
+        }
       ]
     },
     {
